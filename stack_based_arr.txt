@@ -1,0 +1,80 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+#define ll long long;
+using namespace std;
+
+ //implemntaion of stack using  array
+ 
+ class arr_stack{
+     int *arr;
+     int max;
+     int length;
+     
+     public:
+     //constructor
+     arr_stack(int sz):length(0),arr(new int[sz]),max(sz){
+         
+     }
+     // empty
+     bool empty(){
+         return length==0;
+     }
+     // get stack length
+     int getlength(){
+         return length;
+     }
+     void push(int element){
+         if(length>max)return;
+         arr[length++]=element;
+     }
+     void pop(){
+        if(length<=0)return; 
+        length--;
+     }
+     void print(){
+         for(int i=0;i<length;i++){
+             cout<<arr[i]<<" ";
+         }
+         cout<<endl;
+     }
+ };
+
+
+int main()
+{
+    cout<<"linked list it is 0 based  \n";
+     arr_stack st(5);
+     st.push(1);
+     st.push(2);
+     st.push(3);
+     st.push(4);
+     st.push(5);
+     st.pop();
+     cout<<st.getlength()<<endl;
+     st.push(6);
+     st.print();
+     cout<<st.getlength();
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
