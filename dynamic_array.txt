@@ -1,0 +1,91 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <bits/stdc++.h>
+#define ll long long;
+using namespace std;
+
+class dynamin_array{
+  private:
+  int length;
+  int *arr;
+  
+  // pubic methods
+  public:
+  
+  dynamin_array(int sz){ // constructor
+      arr=new int [sz];
+  }
+  bool empty(){         // check the array is emepty
+      return length==0 ;  
+  }
+  int getlength(){        // getting the lengh of the array
+      return length;
+  }
+  void push(int element){ //  adding element in the array
+      arr[length++]=element;
+  }
+  void pop(){     // deleting last elemet from the array
+      if(length>=0){
+        length--;
+      }
+  }
+  void print(){    // print the element in the arry
+     int x=length;
+     for(int i=0;i<x;i++)cout<<arr[i]<<" ";
+     cout<<endl;
+  }                    
+  int find(int key){    // searching for an element in the array and finding it is index
+      for(int i=0;i<length;i++){
+          if(arr[i]==key)return i;
+      }
+      return -1;
+  }
+};
+
+
+int main()
+{
+    cout<<"Hello World\n";
+    dynamin_array arr(6);  // geting objec arr from the class dynaminc_array;
+    arr.push(1);
+    arr.push(2);
+    arr.push(3);
+    arr.push(4);
+    arr.push(5);
+    arr.print();
+    cout<<arr.find(3)<<endl;
+    cout<<arr.getlength()<<endl;
+    arr.pop();
+    arr.pop();
+    arr.pop();
+    arr.pop();
+    cout<<arr.empty()<<endl;
+    cout<<arr.getlength()<<endl;
+    arr.pop();
+    cout<<arr.find(3)<<endl;
+    cout<<arr.getlength()<<endl;
+    arr.print();
+    
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
