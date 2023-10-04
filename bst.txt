@@ -1,0 +1,300 @@
+
+// yousef mostafa
+
+#include <bits/stdc++.h>
+#define sqr(x) ((x) * (x))
+#define YES printf("YES\n")
+#define Yes printf("Yes\n")
+#define NO printf("NO\n")
+#define No printf("No\n")
+#define all(x) x.begin(), x.end()
+using namespace std;
+typedef long long ll;
+using namespace std;
+
+//*******************************
+#define w(t)  \
+  ll t;      \
+  cin >> t;   \
+  while (t--) \
+  {           \
+    solve();  \
+  }
+
+//*******************************
+void init()
+{
+  cin.tie(0);
+  cin.sync_with_stdio(0);
+}
+//__________________________________________________________
+
+ll n, m, q, k, l, r, x, y, z;
+ll mod = 1e9 + 7;
+const int array_max_size = 1e6 + 2;
+const int max_size=1e5;
+//
+class BST{
+    struct Node{
+        int val;
+        Node*left;
+        Node*right;
+    };
+    Node*root;
+    int length;
+public:
+    BST():root(NULL),length(0)
+    {
+
+    }
+    Node*getnode(int ele)
+    {
+        Node*newnode=new Node;
+        newnode->left=NULL;
+        newnode->right=NULL;
+        newnode->val=ele;
+        return newnode;
+    }
+    // check is empty;
+    int size()
+    {
+        return length;
+    }
+    bool empty()
+    {
+        return root==NULL;
+    }
+    // inserting an element;
+     void insertt(Node*head,int ele)
+    {
+        if(!head)
+        {
+            Node*newnode=getnode(ele);
+            head=newnode;
+            root=head;
+        }
+        else if(ele<head->val){
+            if(!head->left){
+                Node*newnode=getnode(ele);
+                head->left=newnode;
+            }
+            else{
+              insertt(head->left,ele);
+            }
+        }
+        else if(ele>head->val){
+            if(!head->right){
+                Node*newnode=getnode(ele);
+                head->right=newnode;
+            }
+            else{
+               insertt(head->right,ele);
+            }
+        }
+    }
+
+    void insert(int ele){
+        insertt(root,ele);
+        length++;
+    }
+
+    // deleting an element
+
+
+     // get the minnum element in BST
+     int minium(Node*temp)
+     {
+         if(!temp->left){
+            return temp->val;
+         }
+         minium(temp->left);
+     }
+     int minium()
+     {
+         return minium(root);
+     }
+
+
+    // get the maxium element in BST
+     int maxium(Node*temp)
+     {
+         if(!temp->right){
+            return temp->val;
+         }
+         maxium(temp->right);
+     }
+     int  maxium()
+     {
+         return maxium(root);
+     }
+
+    // deleting element
+     Node* erase(Node*temp,int ele)
+     {
+         if(temp)
+          if(ele<temp->val)temp->left=erase(temp->left,ele);
+         else if(ele>temp->val)temp->right=erase(temp->right,ele);
+         else{
+          length--;
+         if(!temp->left&&!temp->right){
+            delete temp;
+            temp=NULL;
+         }
+         else if(!temp->left){
+            Node*cur=temp;
+            temp=temp->right;
+            delete cur;
+         }
+         else if(!temp->right)
+         {
+             Node*cur=temp;
+             temp=temp->left;
+             delete cur;
+         }
+         else{
+             Node*rep=temp->right;
+              while(rep->left!=NULL){
+                  rep=rep->left;
+              }
+              temp->val=rep->val;
+              temp->right=erase(temp->right,rep->val);
+         }
+       }
+       return temp;
+     }
+     void erase(int ele)
+     {
+         erase(root,ele);
+     }
+   //________________________________________________________
+    //inorder function;
+    void inorder(Node*temp){
+        if(temp==NULL)return;
+        inorder(temp->left);
+         cout<<temp->val<<" ";
+        inorder(temp->right);
+    }
+    void inorder(){
+        inorder(root);
+        cout<<endl;
+    }
+    //preorder function
+    void preorder(Node*temp){
+        if(temp==NULL)return;
+         cout<<temp->val<<" ";
+        preorder(temp->left);
+        preorder(temp->right);
+    }
+    void preorder(){
+        preorder(root);
+        cout<<endl;
+    }
+    //postorderr function;
+    void postorder(Node*temp){
+        if(temp==NULL)return;
+        postorder(temp->left);
+        postorder(temp->right);
+         cout<<temp->val<<" ";
+    }
+    void postorder(){
+        postorder(root);
+        cout<<endl;
+    }
+   //______________________________________________________
+    // displaying the BST
+    void display(Node*temp)
+    {   if(!temp)return;
+        display(temp->left);
+        cout<<temp->val<<" ";
+        display(temp->right);
+    }
+    void display()
+    {
+        display(root);
+        cout<<endl;
+    }
+
+    // GET HEIGHT
+    int height(Node*temp)
+    {
+
+        if(temp==NULL)return -1;
+        return 1+max(height(temp->left),height(temp->right));
+    }
+    int height()
+    {
+        return height(root);
+    }
+
+    // clearing the BST
+    void clear(Node*temp)
+    {
+        if(!temp)return;
+        clear(temp->left);
+        clear(temp->right);
+        delete temp;
+        temp=NULL;
+    }
+    ~BST(){
+        clear(root);
+    }
+
+};
+
+void solve(){
+
+    BST b;
+    b.insert(5);
+    b.insert(2);
+    b.insert(4);
+    b.insert(1);
+    b.insert(3);
+    b.insert(7);
+    b.insert(6);
+
+    b.erase(4);
+    b.display();
+
+    cout<<"min element "<<b.minium()<<endl;
+    cout<<"max element "<<b.maxium()<<endl;
+
+    cout<<"height is "<<b.height()<<endl;
+
+    cout<<"size of the tree is "<<b.size()<<endl;
+
+    cout<<"inorder traversing ";
+    b.inorder();
+   cout<<"preorder traversing ";
+    b.preorder();
+    cout<<"postorder traversing ";
+    b.postorder();
+
+    cout<<endl;
+
+}
+
+
+int main()
+{
+
+  init();
+ //  w(t);
+  solve();
+  return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
