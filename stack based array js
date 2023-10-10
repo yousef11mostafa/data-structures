@@ -1,0 +1,37 @@
+
+
+
+class Stack{
+   constructor(){
+    this.arr=[];
+   }
+   push(element){
+      this.arr.push(element);
+   }
+   pop(){
+    this.arr.pop();
+   }
+   isempty(){
+    return this.arr.length===0;
+   }
+   size(){
+    return this.arr.length;
+   }
+   print(){
+      console.log(this.arr.toString());
+   }
+};
+
+const stack=new Stack;
+console.log(stack.isempty());
+stack.push(1);
+stack.push(5);
+stack.push(4);
+stack.push(6);
+stack.push(2);
+stack.pop();
+
+stack.print();
+
+console.log(stack.size());
+console.log(stack.isempty());
