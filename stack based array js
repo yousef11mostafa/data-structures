@@ -1,25 +1,29 @@
 
 
 
+
 class Stack{
-   constructor(){
-    this.arr=[];
-   }
-   push(element){
-      this.arr.push(element);
-   }
-   pop(){
-    this.arr.pop();
-   }
-   isempty(){
-    return this.arr.length===0;
-   }
-   size(){
-    return this.arr.length;
-   }
-   print(){
-      console.log(this.arr.toString());
-   }
+  constructor(){
+   this.arr=[];
+  }
+  push(element){
+     this.arr.push(element);
+  }
+  pop(){
+   this.arr.pop();
+  }
+  top(){
+    return this.arr[this.arr.length-1];
+  }
+  isempty(){
+   return this.arr.length===0;
+  }
+  size(){
+   return this.arr.length;
+  }
+  print(){
+     console.log(this.arr.toString());
+  }
 };
 
 const stack=new Stack;
@@ -35,3 +39,5 @@ stack.print();
 
 console.log(stack.size());
 console.log(stack.isempty());
+
+console.log(stack.top())
