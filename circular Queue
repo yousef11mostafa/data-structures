@@ -1,0 +1,83 @@
+
+
+
+class Queue{
+  constructor(capcity){
+    this.arr=new Array(capcity);
+    this.capcity=capcity;
+    this.rear=capcity-1;
+    this.front=0;
+    this.length=0;
+  }
+  size(){
+   return this.length;
+  }
+  isEmpty(){
+   return this.length===0;
+  }
+   isFull()
+	{
+		return this.length === this.capcity;
+	}
+  push(element){
+    if(!this.isFull()){
+      this.rear=(this.rear+1)%this.capcity;
+      this.arr[this.rear]=element;
+      this.length++;
+      // if(this.length>0&&this.front===-1){
+      //   this.front++;
+      // }
+    }
+  }
+  pop(){
+      if(!this.isEmpty()){
+      this.front++;  
+      this.front%=this.capcity;
+      this.length--;
+    }
+  }
+
+  peek(){
+   if(!this.isEmpty())
+   return this.arr[this.front];
+  }
+  back(){
+   return this.arr[this.rear];
+  }
+  print(){
+    console.log("############");  
+    let i=this.front;
+    for(;i!=this.rear;i++){
+      i%=this.capcity;
+      console.log(this.arr[i]);
+    }
+    console.log(this.arr[i]);
+
+    console.log("############");
+  }
+};
+
+
+
+const q=new Queue(5);
+
+q.push(1);
+q.push(2);
+q.push(3);
+q.push(4);
+q.push(5);
+q.pop();
+q.pop();
+q.push(6);
+q.push(7);
+q.push(8);
+
+console.log(q.peek());
+console.log(q.back());
+console.log(q.size());
+q.print();
+console.log(q.isEmpty());
+// q.print();
+
+
+
