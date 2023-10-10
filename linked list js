@@ -1,0 +1,186 @@
+// Online Javascript Editor for free
+// Write, Edit and Run your Javascript code using JS Online Compiler
+
+
+
+class Node{
+  constructor(element){
+   this.val=element;
+   this.next=null;
+  }
+};
+
+class linked_list{
+  constructor(){
+   this.head=null;
+   this.size=0;
+ }
+ 
+ length(){
+   return this.size;
+ }
+ 
+ isEmpty(){
+   return this.size===0;
+ }
+ 
+ add_first(ele){
+    const newnode=new Node(ele);
+    if(this.isEmpty()){
+     this.head=newnode;
+    }
+    else{
+     newnode.next=this.head;
+     this.head=newnode
+    }
+    this.size++;
+ }
+
+
+ add_last(ele){
+     if(this.isEmpty()){
+      this.add_first(ele);
+     }
+     else{
+      let temp=this.head;
+      while(temp.next!=null){
+       temp=temp.next;
+      }
+      let newnode=new Node(ele);
+      temp.next=newnode;
+      this.size++;
+     }
+ }
+ 
+
+ insert(index,ele){
+     if(index>this.size||index<0){
+         console.log("this index is out of range");
+     }
+     else if(index===0){
+         this.add_first(ele);
+     }
+     else if(index===this.size){
+         this.add_last(ele);
+     }
+     else{
+         let temp=this.head;
+         while(index>1){
+             index--;
+             temp=temp.next;
+         }
+         const newnode=new Node(ele);
+         newnode.next=temp.next;
+         temp.next=newnode;
+         this.size++;
+     }
+ }
+ 
+
+ remove_from(index){
+     if(index<0||index>this.size){
+         return;
+     }
+     else{
+         let temp=this.head;
+         if(index===0){
+          this.head=this.head.next;
+         }
+         else{
+          for(let i=0;i<index-1;i++){
+            temp=temp.next;
+          }
+           let cur=temp.next;
+           temp.next=cur.next;
+         }
+         this.size--;
+     }
+ }
+
+
+ remove_value(key){
+     let temp=this.head;
+     if(this.head.val===key){
+      this.head=this.head.next;
+      return;
+     }
+     else{
+      for(let i=0;i<this.size;i++){
+        if(temp.next.val===key){
+          let cur=temp.next;
+          temp.next=cur.next;
+          return;
+        }
+        temp=temp.next;
+      }
+     }
+     this.size--;
+ }
+
+reverse(){
+  let cur=this.head;
+  let prev=null;
+  let next=cur.next;
+  while(next){
+    next=cur.next;
+    cur.next=prev;
+    prev=cur;
+    cur=next;
+  }
+  this.head=prev;
+}
+
+
+ print(){
+     if(this.isEmpty()){
+         console.log("the list is empty");
+     }
+   else{
+     let temp=this.head;
+    let ans="";
+    while(temp){
+       ans+=`${temp.val}`;
+       temp=temp.next;
+    }
+    console.log(ans);
+  }
+ }
+ 
+}
+
+
+const list=new linked_list();
+
+// list.add_first(0);
+list.print();
+list.add_last(4);
+list.add_last(5);
+list.add_first(3);
+list.add_first(2);
+list.add_first(1);
+list .add_last(9);
+list.add_last(10);
+
+list.insert(0,0);
+list.insert(5,6);
+
+list.remove_from(1);
+
+list.remove_value(4);
+
+// console.log(list.search(4));
+
+console.log(list.length())
+
+console.log(list.isEmpty());
+
+list.print()
+
+list.reverse();
+list.print();
+
+
+
+
+
+
